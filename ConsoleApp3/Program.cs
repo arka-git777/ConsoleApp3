@@ -67,14 +67,6 @@
                         {
                             context.Remove(s);
                             context.SaveChanges();
-                            foreach (var j in context.Students)
-                            {
-                                if (j.Id > s.Id) 
-                                {
-                                    j.Id--;
-                                }
-                            }
-                            context.SaveChanges();
                             break;
                         }
                         else if (s.Id == context.Students.Max(s => s.Id))
