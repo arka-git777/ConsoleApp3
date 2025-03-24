@@ -97,10 +97,13 @@ namespace ConsoleApp3
                     {
                         Console.Write("Enter new name: ");
                         student.Name = Console.ReadLine();
+
                         Console.Write("Enter new age: ");
                         student.age = Convert.ToInt32(Console.ReadLine());
+
                         Console.Write("Enter new email: ");
                         student.Email = Console.ReadLine();
+
                         studentRepos.Update(student);
                         Console.WriteLine("Student updated successfully!");
                     }
