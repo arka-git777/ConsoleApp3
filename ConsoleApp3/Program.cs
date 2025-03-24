@@ -1,10 +1,11 @@
-﻿namespace ConsoleApp3
+﻿using ConsolApp3.DAL;
+namespace ConsoleApp3
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            var context = new AppDbContext();
+            var studentRepos = new StudentRepository();
             /*var student = new Student
             {
                 Name = "Arkadii",
@@ -35,14 +36,14 @@
                         age = age,
                         Email = email
                     };
-                    context.Students.Add(student);
-                    context.SaveChanges();
+                    studentRepos.Add(student);
                     Console.WriteLine("Student added successfully!");
                     Thread.Sleep(1000);
                 }
                 else if (a == 2)
                 {
-                    foreach (var s in context.Students.ToList())
+                    var students = studentRepos.GetAll();
+                    foreach (var s in students)
                     {
 
                         Console.WriteLine($"{s.Id}: {s.Name} {s.age} {s.Email}");
@@ -59,7 +60,7 @@
                         .ToList();
                     context.RemoveRange(remove);
                     context.SaveChanges();*/
-                    Console.Write("Enter name or age or email of the student which you want to delete - ");
+                    /*Console.Write("Enter name or age or email of the student which you want to delete - ");
                     string ch = Console.ReadLine();
                     foreach (var s in context.Students.ToList())
                     {
@@ -73,7 +74,39 @@
                         {
                             Console.WriteLine("Student wasn't found");
                         }
+                    }*/
+                    Console.Write("Enter student ID to delete: ");
+                    int id = Convert.ToInt32(Console.ReadLine());
+                    var student = studentRepos.GetById(id);
+                    if (student != null)
+                    {
+                        studentRepos.Delete(student);
+                        Console.WriteLine("Student deleted successfully!");
                     }
+                    else
+                        Console.WriteLine("Student not found.");
+                    Thread.Sleep(1000);
+                }
+                else if(a == 4)
+                {
+                    Console.Write("Enter student ID to update: ");
+                    int id = Convert.ToInt32(Console.ReadLine());
+                    var student = studentRepos.GetById(id);
+
+                    if (student != null)
+                    {
+                        Console.Write("Enter new name: ");
+                        student.Name = Console.ReadLine();
+                        Console.Write("Enter new age: ");
+                        student.age = Convert.ToInt32(Console.ReadLine());
+                        Console.Write("Enter new email: ");
+                        student.Email = Console.ReadLine();
+                        studentRepos.Update(student);
+                        Console.WriteLine("Student updated successfully!");
+                    }
+                    else
+                        Console.WriteLine("Student not found.");
+                    Thread.Sleep(1000);
                 }
                 else
                     break;
