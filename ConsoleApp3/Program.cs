@@ -37,38 +37,25 @@ namespace ConsoleApp3
                         Console.Write("Day: ");
                         int d = Convert.ToInt32(Console.ReadLine());
                         if (d > 0 && d <= 31)
-                        {
                             date = new DateTime(date.Year, date.Month, d);
-                        }
                         else
-                        {
                             continue;
-                        }
 
                         Console.Write("Month: ");
                         d = Convert.ToInt32(Console.ReadLine());
                         if (d > 0 && d <= 12)
-                        {
                             date = new DateTime(date.Year, d, date.Day);
-                        }
                         else
-                        {
                             continue;
-                        }
 
                         Console.Write("Year: ");
                         d = Convert.ToInt32(Console.ReadLine());
                         if (d > 0 && a < DateTime.Now.Year)
-                        {
                             date = new DateTime(d, date.Month, date.Day);
-                        }
                         else
-                        {
                             continue;
-                        }
                         break;
                     }
-
                     var student = new Student
                     {
                         Name = name,
@@ -86,7 +73,7 @@ namespace ConsoleApp3
                     foreach (var s in students)
                     {
 
-                        Console.WriteLine($"{s.Id}: {s.Name} {s.age} {s.Email}  Birthday: {s.Date}");
+                        Console.WriteLine($"{s.Id}: {s.Name} {s.age} {s.Email}  Birthday: {s.Date.Day}.{s.Date.Month}.{s.Date.Year}");
                     }
                     Console.ReadLine();
                 }
