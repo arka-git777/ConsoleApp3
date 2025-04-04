@@ -30,11 +30,51 @@ namespace ConsoleApp3
                     Console.Write("Enter Email: ");
                     string email = Console.ReadLine();
 
+                    Console.WriteLine("Enter birth date;");
+                    DateTime date = new DateTime(1, 2, 3);
+                    while (true)
+                    {
+                        Console.Write("Day: ");
+                        int d = Convert.ToInt32(Console.ReadLine());
+                        if (d > 0 && d <= 31)
+                        {
+                            date = new DateTime(date.Year, date.Month, d);
+                        }
+                        else
+                        {
+                            continue;
+                        }
+
+                        Console.Write("Month: ");
+                        d = Convert.ToInt32(Console.ReadLine());
+                        if (d > 0 && d <= 12)
+                        {
+                            date = new DateTime(date.Year, d, date.Day);
+                        }
+                        else
+                        {
+                            continue;
+                        }
+
+                        Console.Write("Year: ");
+                        d = Convert.ToInt32(Console.ReadLine());
+                        if (d > 0 && a < DateTime.Now.Year)
+                        {
+                            date = new DateTime(d, date.Month, date.Day);
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                        break;
+                    }
+
                     var student = new Student
                     {
                         Name = name,
                         age = age,
-                        Email = email
+                        Email = email,
+                        Date = date
                     };
                     studentRepos.Add(student);
                     Console.WriteLine("Student added successfully!");
@@ -46,7 +86,7 @@ namespace ConsoleApp3
                     foreach (var s in students)
                     {
 
-                        Console.WriteLine($"{s.Id}: {s.Name} {s.age} {s.Email}");
+                        Console.WriteLine($"{s.Id}: {s.Name} {s.age} {s.Email}  Birthday: {s.Date}");
                     }
                     Console.ReadLine();
                 }
@@ -99,7 +139,7 @@ namespace ConsoleApp3
                         student.Name = Console.ReadLine();
 
                         Console.Write("Enter new age: ");
-                        student.age = Convert.ToInt32(Console.ReadLine());
+                        student.age = Convert.ToInt32(Console.ReadLine()); 
 
                         Console.Write("Enter new email: ");
                         student.Email = Console.ReadLine();
